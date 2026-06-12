@@ -1,2 +1,13 @@
 *
 !.gitignore
+
+# Seed profile pictures — committed so Docker builds include them.
+# User-uploaded files are NOT committed (ephemeral; reset on each deploy).
+!prince-arvee.jpg
+!kian-bahia.png
+!christian-avena.png
+!errol-alday.png
+!john-marata.png
+!ken-estillo.png
+!chito-afable.png
+!ralph-cabello.png
