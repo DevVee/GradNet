@@ -1,13 +1,13 @@
-@extends('layouts.auth')
+﻿@extends('layouts.auth')
 
-@section('title', 'Sign In — ICCBI Alumni')
+@section('title', 'Sign In — GradNet')
 
 @section('content')
 
 {{-- Form header --}}
 <div class="auth-form-header">
     <h2 class="auth-form-title">Welcome back 👋</h2>
-    <p class="auth-form-subtitle">Sign in to your ICCBI Alumni account to continue.</p>
+    <p class="auth-form-subtitle">Sign in to your GradNet account to continue.</p>
 </div>
 
 {{-- Flash messages --}}

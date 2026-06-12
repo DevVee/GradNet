@@ -1,6 +1,6 @@
-@extends('layouts.auth')
+﻿@extends('layouts.auth')
 
-@section('title', 'Create Account — ICCBI Alumni')
+@section('title', 'Create Account — GradNet')
 
 @section('content')
 
@@ -8,7 +8,7 @@
 <div class="auth-form-header">
     <h2 class="auth-form-title">Create Account</h2>
     <p class="auth-form-subtitle">
-        Join the ICCBI Alumni community. All information is protected under
+        Join the GradNet community. All information is protected under
         the <strong>Data Privacy Act of 2012</strong>.
     </p>
 </div>
@@ -175,7 +175,7 @@
     </div>
 
     <div class="mb-3">
-        <label class="form-label required">Highest Degree at ICC Balayan</label>
+        <label class="form-label required">Highest Educational Degree</label>
         <select name="highest_degree" class="form-control" required>
             <option value=""></option>
             @foreach($highestDegrees as $opt)

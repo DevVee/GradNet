@@ -1,6 +1,6 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
-@section('title', 'Messages — ICCBI Alumni')
+@section('title', 'Messages — GradNet')
 
 @section('content')
 @php
@@ -73,9 +73,7 @@
                         ? $msgTime->format('g:i A')
                         : ($msgTime->isYesterday() ? 'Yesterday' : $msgTime->format('M j')))
                     : '';
-                $oAvatar   = $other->profile_picture
-                    ? asset('storage/' . $other->profile_picture)
-                    : $svgFallback;
+                $oAvatar   = $other->avatar_url;
             @endphp
             <a href="{{ route('messages.show', $convo->id) }}" class="msg-thread">
                 <div class="msg-thread-avatar">
@@ -104,7 +102,7 @@
         <div class="msg-empty">
             <div class="icon">💬</div>
             <h3>Your inbox is empty</h3>
-            <p>Start a conversation with a fellow ICCBI alumnus.</p>
+            <p>Start a conversation with a fellow GradNet alumnus.</p>
             <button class="btn btn-primary btn-sm mt-4" onclick="openNewMsg()">
                 <i class="fas fa-pen me-1"></i> New Message
             </button>
@@ -169,7 +167,7 @@ function searchUsers(q) {
                     </div>
                     <div class="msg-thread-body">
                         <div class="msg-thread-name">${u.name}</div>
-                        <div class="msg-thread-preview">${u.program ?? 'ICCBI Alumni'}</div>
+                        <div class="msg-thread-preview">${u.program ?? 'GradNet'}</div>
                     </div>
                     <i class="fas fa-chevron-right text-muted" style="font-size:0.7rem;"></i>
                 </div>`).join('');

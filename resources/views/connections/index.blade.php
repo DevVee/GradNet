@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Connections — ICCBI Alumni')
+@section('title', 'Connections — GradNet')
 
 @section('content')
 
@@ -99,7 +99,7 @@
                         {{ $pending->requester->full_name }}
                     </a>
                     <div class="text-muted" style="font-size:var(--text-xs);margin-top:1px;">
-                        {{ $pending->requester->program ?? 'ICCBI Alumni' }}
+                        {{ $pending->requester->program ?? 'GradNet Alumni' }}
                         @if($pending->requester->graduation_year) · {{ $pending->requester->graduation_year }}@endif
                     </div>
                     @if($pending->requester->employment_status)
@@ -153,7 +153,7 @@
                         </a>
                         <div class="people-name mt-1">{{ $conn->first_name }}<br>{{ $conn->last_name }}</div>
                         <div class="people-meta">
-                            {{ $conn->program ?? 'ICCBI Alumni' }}
+                            {{ $conn->program ?? 'GradNet Alumni' }}
                             @if($conn->graduation_year) · {{ $conn->graduation_year }}@endif
                             @if($conn->employment_status)
                             <br><span style="color:var(--success);font-size:0.65rem;">
@@ -230,7 +230,7 @@
                                 {{ $person->first_name }}<br>{{ $person->last_name }}
                             </div>
                             <div class="people-meta">
-                                {{ $person->program ?? 'ICCBI Alumni' }}
+                                {{ $person->program ?? 'GradNet Alumni' }}
                                 @if($person->graduation_year) · {{ $person->graduation_year }}@endif
                                 @if($person->employment_status)
                                 <br><span style="color:var(--success);font-size:0.65rem;">

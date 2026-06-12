@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekly Update — ICCBI Alumni</title>
+    <title>Weekly Update — GradNet</title>
 </head>
 <body style="margin:0;padding:0;background:#f0f2f5;font-family:Arial,Helvetica,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#f0f2f5;padding:40px 16px;">
@@ -15,7 +15,7 @@
         {{-- Header --}}
         <tr>
           <td style="background:#003087;padding:28px 32px;">
-            <p style="margin:0;color:#c4972f;font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">ICCBI Alumni Network</p>
+            <p style="margin:0;color:#c4972f;font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">GradNet</p>
             <h1 style="margin:6px 0 0;color:#ffffff;font-size:1.4rem;font-weight:700;">Your Weekly Update 📬</h1>
             <p style="margin:6px 0 0;color:#a8bcd8;font-size:0.8rem;">{{ now()->format('F j, Y') }}</p>
           </td>
@@ -25,7 +25,7 @@
         <tr>
           <td style="padding:28px 32px 0;">
             <p style="margin:0 0 24px;font-size:0.95rem;color:#3d3d3d;line-height:1.6;">
-              Here's what's happening in the ICCBI Alumni community this week.
+              Here's what's happening in the GradNet community this week.
             </p>
 
             {{-- ── Upcoming Events ──────────────────────────────── --}}
@@ -135,7 +135,7 @@
         <tr>
           <td style="background:#f7f8fa;padding:16px 32px;border-top:1px solid #e0e0e0;">
             <p style="margin:0;font-size:0.75rem;color:#9a9ea5;">
-              © {{ date('Y') }} ICCBI Alumni Network &mdash; You are receiving this because you are a verified alumnus.
+              © {{ date('Y') }} GradNet &mdash; You are receiving this because you are a verified alumnus.
               This is a weekly automated digest.
             </p>
           </td>

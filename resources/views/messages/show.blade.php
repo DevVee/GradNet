@@ -17,7 +17,7 @@
              onerror="this.onerror=null;this.src='{{ asset('images/default-avatar.svg') }}'">
         <div class="flex-grow-1 min-w-0">
             <div class="fw-700 text-dark" style="font-size:var(--text-sm);">{{ $other->full_name }}</div>
-            <div class="text-muted" style="font-size:var(--text-xs);">{{ $other->program ?? 'ICCBI Alumni' }}</div>
+            <div class="text-muted" style="font-size:var(--text-xs);">{{ $other->program ?? 'GradNet' }}</div>
         </div>
         <div class="d-flex gap-1 ms-auto">
             <a href="{{ route('profile.show', $other->id) }}" class="topbar-btn" title="View profile">

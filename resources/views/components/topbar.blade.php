@@ -1,7 +1,7 @@
 {{--
-    Sticky topbar — 60px, full-width.
+    Sticky topbar — 60px, full-width, dark gradient background.
+    Brand: GradNet logo + name (graduation cap icon).
     Contains: brand, global search, messages, notifications, user avatar dropdown.
-    Active states: .active class applied to current section's icon button.
 --}}
 @php
     $me          = auth()->user();
@@ -14,12 +14,12 @@
     <div class="topbar-inner">
 
         {{-- Brand --}}
-        <a href="{{ route('dashboard') }}" class="topbar-brand" title="ICCBI Alumni Home">
-            <img src="{{ asset('images/logo.png') }}"
-                 alt="ICCBI"
-                 onerror="this.style.display='none'">
+        <a href="{{ route('dashboard') }}" class="topbar-brand" title="GradNet Home">
+            <div class="topbar-brand-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
             <span class="topbar-brand-name">
-                ICCBI <span>Alumni</span>
+                Grad<span>Net</span>
             </span>
         </a>
 
@@ -42,7 +42,7 @@
                class="topbar-btn {{ $isMessages ? 'active' : '' }}"
                title="Messages"
                aria-label="Messages">
-                <i class="fas fa-message" style="color:#3b82f6;"></i>
+                <i class="fas fa-message"></i>
                 <span class="topbar-badge" id="msgBadgeTopbar" aria-live="polite"></span>
             </a>
 
@@ -52,7 +52,7 @@
                title="Notifications"
                aria-label="Notifications"
                id="notifTopbarBtn">
-                <i class="fas fa-bell" style="color:#ef4444;"></i>
+                <i class="fas fa-bell"></i>
                 <span class="topbar-badge" id="notifBadgeTopbar" aria-live="polite"></span>
             </a>
 
@@ -68,6 +68,7 @@
                          class="avatar avatar-sm"
                          onerror="this.onerror=null;this.src=this.dataset.fallback"
                          data-fallback="{{ $svgAvatar }}">
+                    <span class="topbar-user-name">{{ $me?->first_name }}</span>
                     <i class="fas fa-chevron-down chevron"></i>
                 </button>
 

@@ -23,7 +23,7 @@
         @isset($news)
             @if ($news->image_path && !str_starts_with($news->image_path, 'images/'))
                 <div class="mb-2">
-                    <img src="{{ Storage::url($news->image_path) }}"
+                    <img src="{{ $news->image_url ?? '' }}"
                          alt="current" class="img-fluid rounded" style="max-height:140px;object-fit:cover;">
                     <div class="text-muted" style="font-size:0.75rem;">Current image. Upload a new one to replace.</div>
                 </div>

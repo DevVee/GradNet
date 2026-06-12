@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'ICCBI Alumni')</title>
+    <title>@yield('title', 'GradNet')</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,11 +21,11 @@
             {{-- Logo + name --}}
             <div class="auth-brand-logo-wrap">
                 <img src="{{ asset('images/logo.png') }}"
-                     alt="ICCBI Logo"
+                     alt="GradNet Logo"
                      onerror="this.style.display='none'">
                 <div class="brand-name">
-                    ICCBI Alumni
-                    <small>Immaculate Conception College</small>
+                    GradNet
+                    <small>Alumni Network Platform</small>
                 </div>
             </div>
 
@@ -74,9 +74,9 @@
             {{-- Mobile-only logo --}}
             <div class="auth-form-logo">
                 <img src="{{ asset('images/logo.png') }}"
-                     alt="ICCBI Logo"
+                     alt="GradNet Logo"
                      onerror="this.style.display='none'">
-                <span>ICCBI Alumni</span>
+                <span>GradNet</span>
             </div>
 
             @yield('content')

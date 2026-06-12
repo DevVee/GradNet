@@ -36,7 +36,7 @@
             @isset($event)
                 @if ($event->image_path && !str_starts_with($event->image_path, 'images/'))
                     <div class="mb-2">
-                        <img src="{{ Storage::url($event->image_path) }}" alt="current" class="img-fluid rounded" style="max-height:120px;object-fit:cover;">
+                        <img src="{{ $event->image_url ?? '' }}" alt="current" class="img-fluid rounded" style="max-height:120px;object-fit:cover;">
                         <div class="text-muted" style="font-size:0.75rem;">Current image.</div>
                     </div>
                 @endif

@@ -26,7 +26,7 @@
                 @forelse ($news as $item)
                     <tr>
                         <td>
-                            <img src="{{ $item->image_path && !str_starts_with($item->image_path, 'images/') ? Storage::url($item->image_path) : asset($item->image_path ?? 'images/ICCLOGO.png') }}"
+                            <img src="{{ $item->image_url ?? asset('images/ICCLOGO.png') }}"
                                  alt="{{ $item->title }}"
                                  style="width:52px;height:36px;object-fit:cover;border-radius:4px;">
                         </td>

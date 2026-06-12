@@ -1,6 +1,6 @@
-@extends('layouts.auth')
+﻿@extends('layouts.auth')
 
-@section('title', 'Registration Submitted — ICCBI Alumni')
+@section('title', 'Registration Submitted — GradNet')
 
 @section('content')
 <div class="auth-page" style="overflow:hidden;">

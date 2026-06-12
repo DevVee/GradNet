@@ -1,6 +1,6 @@
-@extends('layouts.auth')
+﻿@extends('layouts.auth')
 
-@section('title', 'Welcome — ICCBI Alumni')
+@section('title', 'Welcome — GradNet')
 
 @section('content')
 <div class="auth-page" style="overflow:hidden;">
@@ -16,7 +16,7 @@
                 animation:scaleIn 0.45s ease forwards;">
 
         <img src="{{ asset('images/ICCLOGO.png') }}"
-             alt="ICCBI Logo"
+             alt="GradNet Logo"
              style="width:100px;height:auto;margin-bottom:var(--sp-4);
                     border-radius:var(--radius-sm);animation:bounce 1.5s infinite;"
              onerror="this.style.display='none'">

@@ -32,7 +32,7 @@
                     @endphp
                     <tr>
                         <td>
-                            <img src="{{ $event->image_path && !str_starts_with($event->image_path, 'images/') ? Storage::url($event->image_path) : asset($event->image_path ?? 'images/ICCLOGO.png') }}"
+                            <img src="{{ $event->image_url ?? asset('images/ICCLOGO.png') }}"
                                  alt="{{ $event->title }}"
                                  style="width:52px;height:36px;object-fit:cover;border-radius:4px;">
                         </td>

@@ -149,23 +149,24 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
     0%   { transform: scale(1); opacity: 0.8; }
     100% { transform: scale(2.2); opacity: 0; }
 }
+/* ── TOPBAR — dark gradient, GradNet brand ──────────────────────── */
 .topbar {
     position: fixed;
     top:0; left:0; right:0;
     height: var(--topbar-h);
-    background: var(--surface);
-    border-bottom: 1px solid var(--border-light);
-    box-shadow: 0 1px 0 var(--border-light), 0 2px 8px rgba(0,0,0,0.06);
+    background: linear-gradient(90deg, #001540 0%, #003087 55%, #1e4db7 100%);
+    border-bottom: none;
+    box-shadow: 0 2px 16px rgba(0,21,64,0.45), 0 1px 0 rgba(255,255,255,0.06);
     z-index: 900;
     display: flex;
     align-items: center;
 }
-/* Accent gradient underline — gives topbar life */
+/* Gold shimmer stripe at bottom */
 .topbar::after {
     content: '';
     position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 60%, transparent 100%);
-    opacity: 0.35;
+    background: linear-gradient(90deg, transparent 0%, var(--accent) 40%, #e8b84b 60%, transparent 100%);
+    opacity: 0.7;
     pointer-events: none;
 }
 .topbar-inner {
@@ -178,15 +179,25 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
     align-items: center;
     gap: var(--sp-4);
 }
+/* Brand */
 .topbar-brand {
-    display: flex; align-items: center; gap: var(--sp-3);
+    display: flex; align-items: center; gap: 10px;
     text-decoration: none; flex-shrink: 0;
 }
-.topbar-brand img { width: 34px; height: 34px; border-radius: var(--radius-sm); object-fit: contain; }
+.topbar-brand-icon {
+    width: 34px; height: 34px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; color: var(--accent);
+    backdrop-filter: blur(4px);
+    transition: var(--ease);
+}
+.topbar-brand:hover .topbar-brand-icon { background: rgba(255,255,255,0.22); transform: scale(1.06); }
 .topbar-brand-name {
-    font-size: var(--text-md);
+    font-size: 1.1rem;
     font-weight: 800;
-    color: var(--primary);
+    color: #ffffff;
     letter-spacing: -0.02em;
     white-space: nowrap;
 }
@@ -196,40 +207,41 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 .topbar-search { position: relative; max-width: 420px; width: 100%; justify-self: center; }
 .topbar-search input {
     width: 100%;
-    background: var(--surface-2);
-    border: 1.5px solid var(--border-light);
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.2);
     border-radius: var(--radius-full);
     padding: 8px 16px 8px 38px;
     font-size: var(--text-sm);
-    color: var(--text-dark);
+    color: #ffffff;
     transition: var(--ease);
+    backdrop-filter: blur(4px);
 }
 .topbar-search input:focus {
     outline: none;
-    border-color: var(--primary);
-    background: var(--surface);
-    box-shadow: 0 0 0 3px var(--primary-light);
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.18);
+    box-shadow: 0 0 0 3px rgba(196,151,47,0.25);
 }
-.topbar-search input::placeholder { color: var(--text-muted); }
+.topbar-search input::placeholder { color: rgba(255,255,255,0.5); }
 .topbar-search-icon {
     position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-    color: var(--text-muted); font-size: 0.8rem; pointer-events: none; transition: var(--ease);
+    color: rgba(255,255,255,0.5); font-size: 0.8rem; pointer-events: none; transition: var(--ease);
 }
-.topbar-search input:focus ~ .topbar-search-icon { color: var(--primary); }
+.topbar-search input:focus ~ .topbar-search-icon { color: var(--accent); }
 
 /* Topbar action buttons */
-.topbar-actions { display: flex; align-items: center; gap: 2px; }
+.topbar-actions { display: flex; align-items: center; gap: 4px; }
 .topbar-btn {
     width: 40px; height: 40px;
     border-radius: var(--radius-full);
     display: flex; align-items: center; justify-content: center;
-    color: var(--text-secondary);
+    color: rgba(255,255,255,0.8);
     background: transparent; border: none;
     position: relative; transition: var(--ease);
-    text-decoration: none; font-size: 1rem;
+    text-decoration: none; font-size: 1.05rem;
 }
-.topbar-btn:hover { background: var(--surface-2); color: var(--primary); transform: scale(1.05); }
-.topbar-btn.active { color: var(--primary); background: var(--primary-light); }
+.topbar-btn:hover { background: rgba(255,255,255,0.15); color: #fff; transform: scale(1.08); }
+.topbar-btn.active { color: var(--accent); background: rgba(196,151,47,0.18); }
 .topbar-btn.has-notif i { animation: bellShake 0.7s ease; }
 /* Pulsing ring behind notification bell */
 .topbar-btn.has-notif::before {
@@ -249,36 +261,42 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
     font-size: 0.5rem; font-weight: 700;
     border-radius: var(--radius-full);
     display: none; align-items: center; justify-content: center;
-    padding: 0 3px; border: 2px solid var(--surface);
+    padding: 0 3px; border: 2px solid #003087;
 }
 .topbar-badge.visible { display: flex; }
 
-/* User avatar dropdown */
+/* User avatar + name chip */
 .topbar-user { position: relative; margin-left: var(--sp-2); }
 .topbar-user-btn {
     display: flex; align-items: center; gap: var(--sp-2);
-    padding: 4px 8px 4px 4px;
+    padding: 5px 10px 5px 5px;
     border-radius: var(--radius-full); border: none;
-    background: transparent; cursor: pointer; transition: var(--ease);
+    background: rgba(255,255,255,0.12);
+    cursor: pointer; transition: var(--ease);
+    border: 1.5px solid rgba(255,255,255,0.2);
 }
-.topbar-user-btn:hover { background: var(--surface-2); }
+.topbar-user-btn:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.35); }
 .topbar-user-btn img {
-    width: 32px; height: 32px;
+    width: 30px; height: 30px;
     border-radius: var(--radius-full); object-fit: cover;
-    border: 2px solid var(--border); transition: var(--ease);
+    border: 2px solid rgba(255,255,255,0.4); transition: var(--ease);
 }
-.topbar-user-btn:hover img { border-color: var(--primary); }
-.topbar-user-btn .chevron { font-size: 0.6rem; color: var(--text-secondary); transition: var(--ease); }
+.topbar-user-btn:hover img { border-color: var(--accent); }
+.topbar-user-name {
+    font-size: var(--text-xs); font-weight: 600; color: #fff;
+    max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.topbar-user-btn .chevron { font-size: 0.55rem; color: rgba(255,255,255,0.6); transition: var(--ease); }
 .topbar-user-btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
 
 /* Dropdown */
 .topbar-dropdown {
-    position: absolute; top: calc(100% + 8px); right: 0;
+    position: absolute; top: calc(100% + 10px); right: 0;
     background: var(--surface);
     border: 1px solid var(--border-light);
     border-radius: var(--radius);
-    box-shadow: var(--shadow-md);
-    min-width: 210px; padding: var(--sp-2) 0;
+    box-shadow: var(--shadow-lg);
+    min-width: 220px; padding: var(--sp-2) 0;
     z-index: 910; display: none;
     animation: scaleIn 0.15s ease; transform-origin: top right;
 }
@@ -286,8 +304,10 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 .topbar-dropdown-header {
     padding: var(--sp-3) var(--sp-4);
     border-bottom: 1px solid var(--border-light); margin-bottom: var(--sp-1);
+    background: linear-gradient(135deg, var(--primary-light) 0%, #f0f4ff 100%);
+    border-radius: var(--radius) var(--radius) 0 0;
 }
-.topbar-dropdown-header .name  { font-size: var(--text-sm); font-weight: 700; color: var(--text-dark); }
+.topbar-dropdown-header .name  { font-size: var(--text-sm); font-weight: 700; color: var(--primary); }
 .topbar-dropdown-header .email { font-size: var(--text-xs); color: var(--text-muted); margin-top: 1px; }
 .topbar-dropdown a, .topbar-dropdown button {
     display: flex; align-items: center; gap: var(--sp-3);

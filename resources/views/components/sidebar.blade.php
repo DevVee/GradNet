@@ -7,9 +7,7 @@
 @php
     $authUser    = auth()->user();
     $svgAvatar   = asset('images/default-avatar.svg');
-    $avatarUrl   = $authUser?->profile_picture
-        ? asset('storage/' . $authUser->profile_picture)
-        : $svgAvatar;
+    $avatarUrl   = $authUser?->avatar_url ?? $svgAvatar;
     $connections = $authUser?->connections()->count() ?? 0;
     $posts       = $authUser?->posts()->count() ?? 0;
 @endphp
@@ -34,7 +32,7 @@
             <div class="sidebar-profile-info">
                 <div class="name">{{ $authUser?->first_name }} {{ $authUser?->last_name }}</div>
                 <div class="meta">
-                    {{ $authUser?->program ?? 'ICCBI Alumni' }}@if($authUser?->graduation_year) · {{ $authUser->graduation_year }}@endif
+                    {{ $authUser?->program ?? 'GradNet Alumni' }}@if($authUser?->graduation_year) · {{ $authUser->graduation_year }}@endif
                 </div>
             </div>
         </div>

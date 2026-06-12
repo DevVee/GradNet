@@ -1,15 +1,13 @@
 ﻿@extends('layouts.app')
 
-@section('title', 'Feed — ICCBI Alumni')
+@section('title', 'Feed — GradNet')
 
 @section('content')
 
     {{-- ── Stories Bar ──────────────────────────────────────────────── --}}
     @php
         $svgDefault = asset('images/default-avatar.svg');
-        $myAvatar   = $user->profile_picture
-            ? asset('storage/' . $user->profile_picture)
-            : $svgDefault;
+        $myAvatar   = $user->avatar_url;
     @endphp
     <div class="stories-bar">
         <div class="stories-scroll">
@@ -34,9 +32,7 @@
             {{-- Connections --}}
             @forelse($storyUsers as $su)
             @php
-                $suAvatar = $su->profile_picture
-                    ? asset('storage/' . $su->profile_picture)
-                    : $svgDefault;
+                $suAvatar = $su->avatar_url;
             @endphp
             <a href="{{ route('profile.show', $su->id) }}"
                class="story-item"
@@ -227,9 +223,7 @@
 
     @forelse($suggestedAlumni as $alumni)
     @php
-        $aAvatar = $alumni->profile_picture
-            ? asset('storage/' . $alumni->profile_picture)
-            : $svgFallback;
+        $aAvatar = $alumni->avatar_url;
     @endphp
     <div class="suggested-person">
         <a href="{{ route('profile.show', $alumni->id) }}" class="suggested-avatar-link">
@@ -244,7 +238,7 @@
                 {{ $alumni->first_name }} {{ $alumni->last_name }}
             </a>
             <div class="suggested-meta">
-                {{ $alumni->program ?? 'ICCBI Alumni' }}@if($alumni->graduation_year) · {{ $alumni->graduation_year }}@endif
+                {{ $alumni->program ?? 'GradNet' }}@if($alumni->graduation_year) · {{ $alumni->graduation_year }}@endif
             </div>
         </div>
         <form method="POST" action="{{ route('connections.store') }}" class="ms-auto">

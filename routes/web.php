@@ -27,12 +27,15 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\ModerationController;
+use App\Http\Controllers\LandingController;
 
 // ══════════════════════════════════════════════════════════════════
 // GUEST ROUTES
 // ══════════════════════════════════════════════════════════════════
+// Public landing page (redirects to dashboard if already logged in)
+Route::get('/', [LandingController::class, 'index'])->name('landing');
+
 Route::middleware('guest')->group(function () {
-    Route::get('/',        [LoginController::class, 'showForm'])->name('home');
     Route::get('/login',   [LoginController::class, 'showForm'])->name('login');
     Route::post('/login',  [LoginController::class, 'login']);
 

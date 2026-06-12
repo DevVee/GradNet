@@ -1,6 +1,6 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
-@section('title', 'News & Updates — ICCBI Alumni')
+@section('title', 'News & Updates — GradNet')
 
 @section('content')
 

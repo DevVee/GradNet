@@ -1,6 +1,6 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
-@section('title', 'Events — ICCBI Alumni')
+@section('title', 'Events — GradNet')
 
 @section('content')
 
@@ -88,9 +88,7 @@
         <div style="padding:0;">
             @foreach ($previousEvents as $event)
                 @php
-                    $eventImg = $event->image_path
-                        ? Storage::url($event->image_path)
-                        : asset('images/ICCLOGO.png');
+                    $eventImg = $event->image_url ?? asset('images/ICCLOGO.png');
                 @endphp
                 <a href="{{ route('events.show', $event->id) }}"
                    class="d-flex gap-3 text-decoration-none p-4 border-bottom"

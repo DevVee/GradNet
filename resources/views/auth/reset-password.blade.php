@@ -1,6 +1,6 @@
-@extends('layouts.auth')
+﻿@extends('layouts.auth')
 
-@section('title', 'Reset Password — ICCBI Alumni')
+@section('title', 'Reset Password — GradNet')
 
 @section('content')
 
@@ -8,11 +8,11 @@
 
     {{-- Banner --}}
     <div class="auth-banner">
-        <img src="{{ asset('images/icc-background.jpg') }}" alt="ICCBI">
+        <img src="{{ asset('images/icc-background.jpg') }}" alt="GradNet">
         <div class="auth-banner-overlay">
-            <img src="{{ asset('images/logo.png') }}" class="auth-banner-logo" alt="ICCBI Logo"
+            <img src="{{ asset('images/logo.png') }}" class="auth-banner-logo" alt="GradNet Logo"
                  onerror="this.style.display='none'">
-            <span class="auth-banner-title">ICCBI Alumni</span>
+            <span class="auth-banner-title">GradNet</span>
         </div>
     </div>
 

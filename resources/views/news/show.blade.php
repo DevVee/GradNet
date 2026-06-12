@@ -1,6 +1,6 @@
 ﻿@extends('layouts.app')
 
-@section('title', $news->title . ' — ICCBI Alumni')
+@section('title', $news->title . ' — GradNet')
 
 @section('content')
 

@@ -1,6 +1,6 @@
 ﻿@extends('layouts.app')
 
-@section('title', $group->group_name . ' — ICCBI Alumni')
+@section('title', $group->group_name . ' — GradNet')
 
 @section('content')
 

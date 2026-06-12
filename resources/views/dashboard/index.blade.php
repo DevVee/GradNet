@@ -1,6 +1,6 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
-@section('title', 'Home — ICCBI Alumni')
+@section('title', 'Home — GradNet')
 
 @section('content')
 
@@ -16,7 +16,7 @@
     {{-- ── Hero Banner ──────────────────────────────────────────────── --}}
     <div class="hero-banner">
         <h1>{{ $greeting }}, {{ $authUser->first_name }}! 👋</h1>
-        <p>Stay connected with your ICCBI batchmates, explore opportunities,<br class="d-none d-md-inline"> and celebrate our alumni community.</p>
+        <p>Stay connected with your GradNet batchmates, explore opportunities,<br class="d-none d-md-inline"> and celebrate our alumni community.</p>
         <div class="hero-banner-actions">
             <a href="{{ route('feed.index') }}" class="btn hero-btn-light btn-sm">
                 <i class="fas fa-rss me-1"></i> Browse Feed
@@ -113,7 +113,7 @@
                             <a href="{{ route('news.show', $item->id) }}"
                                class="card card-hover text-decoration-none d-block h-100">
                                 <div style="height:140px;overflow:hidden;background:var(--surface-3);">
-                                    <img src="{{ $item->image_path ? Storage::url($item->image_path) : asset('images/ICCLOGO.png') }}"
+                                    <img src="{{ $item->image_url ?? asset('images/ICCLOGO.png') }}"
                                          alt="{{ $item->title }}"
                                          style="width:100%;height:100%;object-fit:cover;">
                                 </div>
@@ -158,7 +158,7 @@
                        onmouseover="this.style.background='var(--surface-2)'"
                        onmouseout="this.style.background='transparent'">
                         <div class="flex-shrink-0" style="width:68px;height:68px;border-radius:var(--radius-sm);overflow:hidden;background:var(--surface-3);">
-                            <img src="{{ $event->image_path ? Storage::url($event->image_path) : asset('images/ICCLOGO.png') }}"
+                            <img src="{{ $event->image_url ?? asset('images/ICCLOGO.png') }}"
                                  alt="{{ $event->title }}"
                                  style="width:100%;height:100%;object-fit:cover;">
                         </div>
@@ -199,7 +199,7 @@
                    onmouseover="this.style.background='var(--surface-2)'"
                    onmouseout="this.style.background='transparent'">
                     <div class="flex-shrink-0 position-relative" style="width:68px;height:68px;border-radius:var(--radius-sm);overflow:hidden;background:var(--surface-3);">
-                        <img src="{{ $event->image_path ? Storage::url($event->image_path) : asset('images/ICCLOGO.png') }}"
+                        <img src="{{ $event->image_url ?? asset('images/ICCLOGO.png') }}"
                              alt="{{ $event->title }}"
                              style="width:100%;height:100%;object-fit:cover;opacity:0.75;">
                         <span class="badge badge-muted position-absolute"
