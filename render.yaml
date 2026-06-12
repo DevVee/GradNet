@@ -11,10 +11,7 @@
 # To rotate: generate a new key with `php artisan key:generate --show`,
 # update this value, and expect all logged-in users to be signed out.
 #
-# ── IMPORTANT: APP_URL ────────────────────────────────────────────────────────
-# After creating the Render service, update APP_URL to your actual service URL
-# (e.g. https://gradnet.onrender.com). Wrong APP_URL breaks asset loading and
-# redirects.
+# Live URL: https://gradnet-nvsm.onrender.com
 
 services:
   - type: web
@@ -40,9 +37,8 @@ services:
       - key: APP_KEY
         value: "base64:o7YSOYxYREgYuFyljWGdR72AZymlAQcyerIY3A9Zz0c="
 
-      # Update this to your actual Render service URL after first deploy
       - key: APP_URL
-        value: "https://gradnet.onrender.com"
+        value: "https://gradnet-nvsm.onrender.com"
 
       - key: APP_TIMEZONE
         value: Asia/Manila
