@@ -11,6 +11,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Trust all upstream proxies (Render's load balancer).
+        // This lets Laravel read X-Forwarded-Proto: https and generate
+        // correct https:// URLs — without it every route() / url() call
+        // produces http:// and browsers warn about insecure form submission.
+        $middleware->trustProxies(at: '*');
+
         $middleware->alias([
             'approved' => \App\Http\Middleware\CheckApproved::class,
             'admin'    => \App\Http\Middleware\AdminMiddleware::class,
