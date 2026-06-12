@@ -6,7 +6,7 @@
 
 {{-- Form header --}}
 <div class="auth-form-header">
-    <h2 class="auth-form-title">Welcome back 👋</h2>
+    <h2 class="auth-form-title">Welcome back</h2>
     <p class="auth-form-subtitle">Sign in to your GradNet account to continue.</p>
 </div>
 
@@ -88,6 +88,23 @@
     </button>
 </form>
 
+{{-- Viewer account quick-access --}}
+<div style="margin-top:20px;padding:16px 18px;background:#f0f4ff;border-radius:12px;border:1px solid #d0dcf5;">
+    <div style="font-size:.75rem;font-weight:700;color:#3d4f6e;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">
+        <i class="fas fa-eye me-1" style="color:#1e4db7;"></i> Quick Browse
+    </div>
+    <p style="font-size:.8rem;color:#7988a1;margin-bottom:12px;line-height:1.5;">
+        Want to explore GradNet before signing up? Browse as <strong style="color:#0d1b2a;">Prince Arvee Avena</strong>.
+    </p>
+    <button type="button" id="viewerBtn"
+            style="width:100%;padding:9px;border-radius:9px;font-size:.85rem;font-weight:600;
+                   background:#fff;border:1.5px solid #d0dcf5;color:#1e4db7;cursor:pointer;
+                   display:flex;align-items:center;justify-content:center;gap:8px;
+                   transition:all .18s;">
+        <i class="fas fa-user-circle"></i> Browse as Viewer
+    </button>
+</div>
+
 <div class="auth-footer-text">
     Don't have an account?
     <a href="{{ route('register') }}">Create account →</a>
@@ -108,5 +125,20 @@ function toggleLoginPwd() {
         icon.className = 'fas fa-eye';
     }
 }
+
+// Viewer button — fills credentials then submits
+document.getElementById('viewerBtn').addEventListener('click', function () {
+    document.querySelector('[name=email_or_phone]').value = 'admin@gradnet.ph';
+    document.querySelector('[name=password]').value = 'password';
+    document.querySelector('form').submit();
+});
+document.getElementById('viewerBtn').addEventListener('mouseover', function () {
+    this.style.background = '#e8eef8';
+    this.style.borderColor = '#1e4db7';
+});
+document.getElementById('viewerBtn').addEventListener('mouseout', function () {
+    this.style.background = '#fff';
+    this.style.borderColor = '#d0dcf5';
+});
 </script>
 @endpush

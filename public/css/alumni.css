@@ -440,8 +440,8 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 .sidebar-link.active { color: var(--primary); font-weight: 600; background: var(--primary-light); }
 .sidebar-link.active i { color: var(--primary); }
 .sidebar-link.active::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px; background: var(--primary); border-radius: 0 3px 3px 0;
+    content: ''; position: absolute; left: 0; top: 4px; bottom: 4px;
+    width: 4px; background: var(--primary); border-radius: 0 4px 4px 0;
 }
 .sidebar-badge {
     margin-left: auto; min-width: 18px; height: 18px;

@@ -31,19 +31,29 @@ img{display:block;max-width:100%}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}.d6{transition-delay:.6s}
 
 /* NAV */
-.lpnav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,box-shadow .3s}
-.lpnav.scrolled{background:rgba(255,255,255,.93);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(0,0,0,.07),0 4px 24px rgba(0,0,0,.06)}
-.nav-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;letter-spacing:-.03em;color:var(--navy)}
+.lpnav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between;transition:background .35s,box-shadow .35s}
+.lpnav.scrolled{background:rgba(255,255,255,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(0,0,0,.07),0 4px 24px rgba(0,0,0,.06)}
+/* Default (on dark hero) */
+.nav-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;letter-spacing:-.03em;color:#fff}
 .nav-brand img{width:36px;height:36px;border-radius:9px;object-fit:contain}
-.nav-brand span{color:var(--blue-mid)}
+.nav-brand span{color:var(--gold)}
 .nav-links{display:flex;align-items:center;gap:2px}
-.nav-links a{padding:8px 16px;border-radius:8px;font-size:.875rem;font-weight:500;color:var(--tb);transition:all .18s var(--ease)}
-.nav-links a:hover{background:var(--g100);color:var(--blue)}
+.nav-links a{padding:8px 16px;border-radius:8px;font-size:.875rem;font-weight:500;color:rgba(255,255,255,.8);transition:all .18s var(--ease)}
+.nav-links a:hover{background:rgba(255,255,255,.12);color:#fff}
 .nav-actions{display:flex;align-items:center;gap:10px}
-.btn-ghost{padding:8px 18px;border-radius:9px;font-size:.875rem;font-weight:600;color:var(--blue);border:1.5px solid var(--blue-light);background:transparent;transition:all .18s;cursor:pointer}
-.btn-ghost:hover{background:var(--blue-light)}
-.btn-solid{padding:8px 20px;border-radius:9px;font-size:.875rem;font-weight:600;color:#fff;background:var(--blue);border:1.5px solid transparent;transition:all .18s;cursor:pointer;box-shadow:0 2px 8px rgba(0,48,135,.3)}
-.btn-solid:hover{background:var(--navy);box-shadow:0 4px 16px rgba(0,48,135,.4);transform:translateY(-1px)}
+.btn-ghost{padding:8px 18px;border-radius:9px;font-size:.875rem;font-weight:600;color:rgba(255,255,255,.9);border:1.5px solid rgba(255,255,255,.3);background:transparent;transition:all .18s;cursor:pointer}
+.btn-ghost:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn-solid{padding:8px 20px;border-radius:9px;font-size:.875rem;font-weight:600;color:#fff;background:var(--gold);border:1.5px solid transparent;transition:all .18s;cursor:pointer;box-shadow:0 2px 8px rgba(196,151,47,.4)}
+.btn-solid:hover{background:#d4a73a;box-shadow:0 4px 16px rgba(196,151,47,.5);transform:translateY(-1px)}
+/* Scrolled (on white bg) */
+.lpnav.scrolled .nav-brand{color:var(--navy)}
+.lpnav.scrolled .nav-brand span{color:var(--gold)}
+.lpnav.scrolled .nav-links a{color:var(--tb)}
+.lpnav.scrolled .nav-links a:hover{background:var(--g100);color:var(--blue)}
+.lpnav.scrolled .btn-ghost{color:var(--blue);border-color:var(--blue-light)}
+.lpnav.scrolled .btn-ghost:hover{background:var(--blue-light)}
+.lpnav.scrolled .btn-solid{background:var(--blue);box-shadow:0 2px 8px rgba(0,48,135,.3)}
+.lpnav.scrolled .btn-solid:hover{background:var(--navy)}
 
 /* HERO */
 .hero{min-height:100vh;background:linear-gradient(160deg,var(--navy) 0%,#002070 40%,var(--blue) 70%,var(--blue-mid) 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding:100px 0 80px}
@@ -126,17 +136,47 @@ img{display:block;max-width:100%}
 
 /* WHY */
 .why-sec{background:var(--g50);padding:100px 0}
-.problem-card{background:var(--surface);border-radius:var(--r);padding:28px;border:1px solid var(--g200);border-left:3px solid #f43f5e;transition:all .25s var(--ease)}
-.problem-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.08);transform:translateY(-3px)}
-.p-icon{width:44px;height:44px;border-radius:10px;background:#fff1f4;color:#f43f5e;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:14px}
-.p-title{font-size:1rem;font-weight:700;color:var(--td);margin-bottom:6px}
-.p-desc{font-size:.875rem;color:var(--tm);line-height:1.6}
-.solution-card{background:var(--surface);border-radius:var(--r);padding:28px;border:1px solid var(--g200);border-left:3px solid var(--blue);transition:all .25s var(--ease)}
-.solution-card:hover{box-shadow:0 8px 32px rgba(0,48,135,.08);transform:translateY(-3px)}
-.s-icon{width:44px;height:44px;border-radius:10px;background:var(--blue-light);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:14px}
-.s-title{font-size:1rem;font-weight:700;color:var(--td);margin-bottom:6px}
-.s-desc{font-size:.875rem;color:var(--tm);line-height:1.6}
-.why-divider{display:flex;align-items:center;justify-content:center;gap:16px;padding:24px 0;color:var(--tm);font-size:.875rem;font-weight:600}
+.problem-card{
+    background:var(--surface);border-radius:var(--r);padding:32px 28px;
+    border:1px solid var(--g200);position:relative;overflow:hidden;
+    transition:all .28s var(--ease);
+}
+.problem-card::after{
+    content:'';position:absolute;inset:0;border-radius:var(--r);
+    background:linear-gradient(135deg,rgba(244,63,94,.04) 0%,transparent 60%);
+    pointer-events:none;
+}
+.problem-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.08);transform:translateY(-4px);border-color:rgba(244,63,94,.2)}
+.p-icon{
+    width:48px;height:48px;border-radius:14px;
+    background:linear-gradient(135deg,#fff1f4,#fde8ed);
+    color:#e11d48;display:flex;align-items:center;justify-content:center;
+    font-size:1.1rem;margin-bottom:18px;
+    box-shadow:0 4px 12px rgba(225,29,72,.15);
+}
+.p-title{font-size:1rem;font-weight:800;color:var(--td);margin-bottom:8px;letter-spacing:-.01em}
+.p-desc{font-size:.875rem;color:var(--tm);line-height:1.65}
+.solution-card{
+    background:var(--surface);border-radius:var(--r);padding:32px 28px;
+    border:1px solid var(--g200);position:relative;overflow:hidden;
+    transition:all .28s var(--ease);
+}
+.solution-card::after{
+    content:'';position:absolute;inset:0;border-radius:var(--r);
+    background:linear-gradient(135deg,rgba(0,48,135,.04) 0%,transparent 60%);
+    pointer-events:none;
+}
+.solution-card:hover{box-shadow:0 12px 40px rgba(0,48,135,.1);transform:translateY(-4px);border-color:rgba(0,48,135,.18)}
+.s-icon{
+    width:48px;height:48px;border-radius:14px;
+    background:linear-gradient(135deg,var(--blue-light),#d0dcf5);
+    color:var(--blue);display:flex;align-items:center;justify-content:center;
+    font-size:1.1rem;margin-bottom:18px;
+    box-shadow:0 4px 12px rgba(0,48,135,.15);
+}
+.s-title{font-size:1rem;font-weight:800;color:var(--td);margin-bottom:8px;letter-spacing:-.01em}
+.s-desc{font-size:.875rem;color:var(--tm);line-height:1.65}
+.why-divider{display:flex;align-items:center;justify-content:center;gap:16px;padding:32px 0;color:var(--blue);font-size:.875rem;font-weight:700}
 .why-divider::before,.why-divider::after{content:'';flex:1;height:1px}
 .why-divider::before{background:linear-gradient(90deg,transparent,var(--g200))}
 .why-divider::after{background:linear-gradient(90deg,var(--g200),transparent)}
@@ -277,10 +317,7 @@ img{display:block;max-width:100%}
 
 <!-- NAV -->
 <nav class="lpnav" id="lpNav">
-  <a class="nav-brand" href="#">
-    <img src="{{ asset('images/gradnet-logo.png') }}" alt="GradNet" onerror="this.style.display='none'">
-    Grad<span>Net</span>
-  </a>
+  <a class="nav-brand" href="#"><img src="{{ asset('images/gradnet-logo.png') }}" alt="GradNet" onerror="this.style.display='none'" style="display:block;"><span style="white-space:nowrap">Grad<b style="color:var(--gold);font-weight:inherit">Net</b></span></a>
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#how-it-works">How It Works</a>
@@ -289,7 +326,7 @@ img{display:block;max-width:100%}
   </div>
   <div class="nav-actions">
     <a href="{{ route('login') }}" class="btn-ghost">Sign In</a>
-    <a href="{{ route('register') }}" class="btn-solid">Get Started</a>
+    <a href="{{ route('login') }}" class="btn-solid">Try Demo</a>
   </div>
 </nav>
 
@@ -303,8 +340,8 @@ img{display:block;max-width:100%}
         <h1 class="hero-headline">Where Graduates<br>Stay <em>Connected</em><br>Beyond Graduation</h1>
         <p class="hero-sub">Reconnect with classmates, expand your professional network, join alumni events, and stay engaged with your school through one unified platform.</p>
         <div class="hero-ctas">
-          <a href="{{ route('register') }}" class="btn-gold"><i class="fas fa-user-plus"></i> Get Started Free</a>
-          <a href="#features" class="btn-outline-w"><i class="fas fa-play-circle"></i> Explore Platform</a>
+          <a href="{{ route('login') }}" class="btn-gold"><i class="fas fa-eye"></i> Try Demo Now</a>
+          <a href="#features" class="btn-outline-w"><i class="fas fa-play-circle"></i> Explore Features</a>
         </div>
         <div class="hero-trust">
           <div class="trust-avatars">
@@ -321,7 +358,7 @@ img{display:block;max-width:100%}
           <div class="mockup-browser">
             <div class="browser-bar">
               <div class="bdots"><span></span><span></span><span></span></div>
-              <div class="burl">gradnet.ph/feed</div>
+              <div class="burl">gradnet.ph</div>
             </div>
             <div class="mbody">
               <div class="msidebar">
@@ -362,28 +399,6 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
-<!-- STATS -->
-<section class="stats-sec">
-  <div class="container">
-    <p class="stats-label">Live Platform Stats</p>
-    <div class="stat-grid reveal">
-      @php $statData=[
-        ['🎓',$stats['alumni'],'+','Alumni Registered'],
-        ['🤝',$stats['connections'],'+','Active Connections'],
-        ['📅',$stats['events'],'','Events Organized'],
-        ['📰',$stats['posts'],'+','Community Posts'],
-        ['🏫',1,'','School Connected'],
-      ]; @endphp
-      @foreach($statData as $s)
-      <div class="stat-card">
-        <div class="si">{{$s[0]}}</div>
-        <div class="sn" data-target="{{$s[1]}}"><span class="counter">0</span><span class="ss">{{$s[2]}}</span></div>
-        <div class="sd">{{$s[3]}}</div>
-      </div>
-      @endforeach
-    </div>
-  </div>
-</section>
 
 <!-- WHY -->
 <section class="why-sec">
@@ -471,7 +486,7 @@ img{display:block;max-width:100%}
           <div class="tbar"><div class="bdots"><span></span><span></span><span></span></div><div class="turl">gradnet.ph/feed</div></div>
           <div class="tscreen">
             <div class="tside">
-              <div class="tb">🎓 GradNet</div>
+              <div class="tb">GradNet</div>
               <div class="tni active"><div class="tnd" style="background:#003087"></div>Feed</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Connections</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Events</div>
@@ -499,10 +514,10 @@ img{display:block;max-width:100%}
       <!-- EVENTS PANEL -->
       <div class="tpanel" id="tour-events">
         <div class="tmock">
-          <div class="tbar"><div class="bdots"><span></span><span></span><span></span></div><div class="turl">gradnet.ph/events</div></div>
+          <div class="tbar"><div class="bdots"><span></span><span></span><span></span></div><div class="turl">gradnet.ph</div></div>
           <div class="tscreen">
             <div class="tside">
-              <div class="tb">🎓 GradNet</div>
+              <div class="tb">GradNet</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Feed</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Connections</div>
               <div class="tni active"><div class="tnd" style="background:#003087"></div>Events</div>
@@ -522,10 +537,10 @@ img{display:block;max-width:100%}
       <!-- DIRECTORY PANEL -->
       <div class="tpanel" id="tour-directory">
         <div class="tmock">
-          <div class="tbar"><div class="bdots"><span></span><span></span><span></span></div><div class="turl">gradnet.ph/connections</div></div>
+          <div class="tbar"><div class="bdots"><span></span><span></span><span></span></div><div class="turl">gradnet.ph</div></div>
           <div class="tscreen">
             <div class="tside">
-              <div class="tb">🎓 GradNet</div>
+              <div class="tb">GradNet</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Feed</div>
               <div class="tni active"><div class="tnd" style="background:#003087"></div>Connections</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Events</div>
@@ -549,10 +564,10 @@ img{display:block;max-width:100%}
       <!-- NEWS PANEL -->
       <div class="tpanel" id="tour-news">
         <div class="tmock">
-          <div class="tbar"><div class="bdots"><span></span><span></span><span></span></div><div class="turl">gradnet.ph/news</div></div>
+          <div class="tbar"><div class="bdots"><span></span><span></span><span></span></div><div class="turl">gradnet.ph</div></div>
           <div class="tscreen">
             <div class="tside">
-              <div class="tb">🎓 GradNet</div>
+              <div class="tb">GradNet</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Feed</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Connections</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Events</div>
@@ -572,10 +587,10 @@ img{display:block;max-width:100%}
       <!-- MESSAGES PANEL -->
       <div class="tpanel" id="tour-messages">
         <div class="tmock">
-          <div class="tbar"><div class="bdots"><span></span><span></span><span></span></div><div class="turl">gradnet.ph/messages</div></div>
+          <div class="tbar"><div class="bdots"><span></span><span></span><span></span></div><div class="turl">gradnet.ph</div></div>
           <div class="tscreen">
             <div class="tside">
-              <div class="tb">🎓 GradNet</div>
+              <div class="tb">GradNet</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Feed</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Connections</div>
               <div class="tni"><div class="tnd" style="background:#65676b"></div>Events</div>
@@ -624,7 +639,7 @@ img{display:block;max-width:100%}
           <li class="ben-item"><div class="ben-check"><i class="fas fa-check"></i></div><div class="ben-text"><strong>{{$b[0]}}</strong><span>{{$b[1]}}</span></div></li>
           @endforeach
         </ul>
-        <div class="mt-4"><a href="{{ route('register') }}" class="btn-gold" style="display:inline-flex;"><i class="fas fa-user-graduate"></i> Join as Alumni</a></div>
+        <div class="mt-4"><a href="{{ route('login') }}" class="btn-gold" style="display:inline-flex;"><i class="fas fa-eye"></i> Try Demo</a></div>
       </div>
       <div class="col-lg-6 rr">
         <div class="bv">
@@ -653,7 +668,7 @@ img{display:block;max-width:100%}
           <li class="ben-item"><div class="ben-check" style="background:#e6f4ed;color:#1a7f4b;"><i class="fas fa-check"></i></div><div class="ben-text"><strong>{{$b[0]}}</strong><span>{{$b[1]}}</span></div></li>
           @endforeach
         </ul>
-        <div class="mt-4"><a href="{{ route('login') }}" class="btn-gold" style="display:inline-flex;background:var(--navy);box-shadow:0 4px 16px rgba(0,21,64,.4);"><i class="fas fa-school"></i> Admin Panel</a></div>
+        <div class="mt-4"><a href="{{ route('login') }}" class="btn-gold" style="display:inline-flex;background:var(--blue);color:#fff;box-shadow:0 4px 16px rgba(0,48,135,.4);"><i class="fas fa-school"></i> Try Demo</a></div>
       </div>
       <div class="col-lg-6 rl">
         <div class="bv" style="background:linear-gradient(145deg,#0f2744,#1a3a6e);">
@@ -723,10 +738,10 @@ img{display:block;max-width:100%}
 <!-- FINAL CTA -->
 <section class="fcta">
   <div class="container">
-    <h2 class="fcta-title">Your Alumni Community<br>Shouldn't End <em>After Graduation</em></h2>
-    <p class="fcta-sub">Build stronger alumni connections, create real opportunities, and keep your community thriving through GradNet — the platform built for graduates.</p>
+    <h2 class="fcta-title">See GradNet<br><em>In Action</em> — Try the Demo</h2>
+    <p class="fcta-sub">Browse the full platform as a real alumni user. No signup required — just click and explore everything GradNet has to offer.</p>
     <div class="fcta-btns">
-      <a href="{{ route('register') }}" class="btn-cta-g"><i class="fas fa-user-plus"></i> Join GradNet Free</a>
+      <a href="{{ route('login') }}" class="btn-cta-g"><i class="fas fa-eye"></i> Try Demo Now</a>
       <a href="{{ route('login') }}" class="btn-cta-o"><i class="fas fa-sign-in-alt"></i> Sign In</a>
     </div>
   </div>
@@ -737,10 +752,7 @@ img{display:block;max-width:100%}
   <div class="container">
     <div class="foot-top">
       <div>
-        <div class="foot-brand">
-          <img src="{{ asset('images/gradnet-logo.png') }}" alt="GradNet" onerror="this.style.display='none'">
-          <span>GradNet</span>
-        </div>
+        <div class="foot-brand"><img src="{{ asset('images/gradnet-logo.png') }}" alt="GradNet" onerror="this.style.display='none'" style="display:block;"><span style="white-space:nowrap">Grad<b style="color:var(--gold);font-weight:inherit">Net</b></span></div>
         <p class="foot-desc">The unified alumni networking platform that keeps graduates connected, informed, and growing — long after graduation day.</p>
         <div class="foot-social">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -759,11 +771,16 @@ img{display:block;max-width:100%}
       </div>
       <div>
         <div class="foot-col-title">Account</div>
-        <ul class="foot-links"><li><a href="{{ route('register') }}">Create Account</a></li><li><a href="{{ route('login') }}">Sign In</a></li><li><a href="{{ route('password.request') }}">Forgot Password</a></li><li><a href="#">Contact Us</a></li></ul>
+        <ul class="foot-links"><li><a href="{{ route('login') }}">View Live Demo</a></li><li><a href="{{ route('login') }}">Sign In</a></li><li><a href="{{ route('password.request') }}">Forgot Password</a></li><li><a href="#">Contact Us</a></li></ul>
       </div>
     </div>
     <div class="foot-bottom">
-      <div class="foot-copy">© {{ date('Y') }} GradNet. All rights reserved.</div>
+      <div>
+        <div class="foot-copy">© {{ date('Y') }} GradNet. All rights reserved.</div>
+        <div style="font-size:.75rem;color:rgba(255,255,255,.22);margin-top:4px;">
+          Designed &amp; developed by <span style="color:rgba(255,255,255,.45);font-weight:600;">Prince Arvee Avena</span> · BSCS 2022
+        </div>
+      </div>
       <div class="foot-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div>
     </div>
   </div>
