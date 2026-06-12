@@ -39,7 +39,7 @@ class NewsController extends Controller
         News::create([
             'title'       => $data['title'],
             'description' => $data['description'],
-            'image_path'  => $imagePath ?? 'images/ICCLOGO.png',
+            'image_path'  => $imagePath ?? 'images/gradnet-logo.png',
             'uploaded_by' => Auth::id(),
         ]);
 

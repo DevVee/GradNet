@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'GradNet')</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon.svg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/gradnet-logo.png') }}">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,7 +22,7 @@
 
             {{-- Logo + name --}}
             <div class="auth-brand-logo-wrap">
-                <img src="{{ asset('images/logo.png') }}"
+                <img src="{{ asset('images/gradnet-logo.png') }}"
                      alt="GradNet Logo"
                      onerror="this.style.display='none'">
                 <div class="brand-name">
@@ -73,7 +75,7 @@
 
             {{-- Mobile-only logo --}}
             <div class="auth-form-logo">
-                <img src="{{ asset('images/logo.png') }}"
+                <img src="{{ asset('images/gradnet-logo.png') }}"
                      alt="GradNet Logo"
                      onerror="this.style.display='none'">
                 <span>GradNet</span>

@@ -45,7 +45,7 @@ class EventController extends Controller
             'description'    => $data['description'],
             'event_datetime' => $data['event_datetime'],
             'location'       => $data['location'],
-            'image_path'     => $imagePath ?? 'images/ICCLOGO.png',
+            'image_path'     => $imagePath ?? 'images/gradnet-logo.png',
             'uploaded_by'    => Auth::id(),
         ]);
 

@@ -256,7 +256,7 @@ function previewFile(input) {
     preview.style.paddingBottom = 'var(--sp-2)';
     preview.innerHTML = `
         <div style="position:relative;">
-            <img src="${file.type.startsWith('video') ? '{{ asset("images/ICCLOGO.png") }}' : url}"
+            <img src="${file.type.startsWith('video') ? '{{ asset("images/gradnet-logo.png") }}' : url}"
                  style="width:52px;height:52px;object-fit:cover;border-radius:var(--radius-sm);border:1px solid var(--border);">
             <button onclick="clearFile()"
                     style="position:absolute;top:-4px;right:-4px;background:var(--danger);color:#fff;border:none;border-radius:50%;width:16px;height:16px;font-size:0.6rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">

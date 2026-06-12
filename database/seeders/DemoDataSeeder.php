@@ -85,8 +85,8 @@ class DemoDataSeeder extends Seeder
             \App\Models\User::whereIn('id', $demoEmails)->delete();
         }
         // Also wipe admin's demo connections/posts so re-seed is fresh
-        $adminUser = \App\Models\User::where('email', 'admin@iccbi.edu.ph')
-            ->orWhere('email', 'admin@gradnet.ph')->first();
+        $adminUser = \App\Models\User::where('email', 'admin@gradnet.ph')
+            ->orWhere('email', 'admin@iccbi.edu.ph')->first();
         if ($adminUser) {
             DB::table('connections')->where('follower_id', $adminUser->id)
                 ->orWhere('followed_id', $adminUser->id)->delete();
@@ -99,8 +99,12 @@ class DemoDataSeeder extends Seeder
         DB::table('events')->truncate();
 
         // ── 1. Admin user ─────────────────────────────────────────────
+        // Migrate old email if it exists
+        \App\Models\User::where('email', 'admin@iccbi.edu.ph')
+            ->update(['email' => 'admin@gradnet.ph']);
+
         $admin = \App\Models\User::updateOrCreate(
-            ['email' => 'admin@iccbi.edu.ph'],
+            ['email' => 'admin@gradnet.ph'],
             [
                 'first_name'        => 'Admin',
                 'last_name'         => 'GradNet',
@@ -196,13 +200,22 @@ class DemoDataSeeder extends Seeder
                 ]);
             }
         }
-        // Admin is connected to EVERY demo user → lively feed
+        // Admin is connected to EVERY demo user (bidirectional) → lively feed
         foreach ($users as $u) {
+            // Admin follows user
             DB::table('connections')->insertOrIgnore([
                 'follower_id' => $admin->id,
                 'followed_id' => $u->id,
                 'status'      => 'accepted',
                 'created_at'  => now()->subDays(rand(1, 120)),
+                'updated_at'  => now()->subDays(rand(0, 5)),
+            ]);
+            // User follows admin back
+            DB::table('connections')->insertOrIgnore([
+                'follower_id' => $u->id,
+                'followed_id' => $admin->id,
+                'status'      => 'accepted',
+                'created_at'  => now()->subDays(rand(1, 110)),
                 'updated_at'  => now()->subDays(rand(0, 5)),
             ]);
         }
@@ -212,7 +225,7 @@ class DemoDataSeeder extends Seeder
         $allUsers = $users->push($admin);
 
         foreach ($allUsers as $idx => $u) {
-            $numPosts = rand(3, 5);
+            $numPosts = rand(6, 9);
             for ($p = 0; $p < $numPosts; $p++) {
                 $content = $this->postContents[($idx * 4 + $p) % count($this->postContents)];
                 $daysAgo = rand(0, 90);
@@ -229,7 +242,7 @@ class DemoDataSeeder extends Seeder
                 if (($idx + $p) % 10 < 7) {
                     // Unsplash photos that look like realistic social posts (people, campus, celebrations)
                     $postImages = [
-                        'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=500&fit=crop&auto=format', // graduation caps
+                        'https://images.unsplash.com/photo-1543269664-76bc3997d9ea?w=800&h=500&fit=crop&auto=format', // happy graduates group
                         'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=500&fit=crop&auto=format', // friends group
                         'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=500&fit=crop&auto=format', // colleagues
                         'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=500&fit=crop&auto=format', // study group
@@ -274,8 +287,8 @@ class DemoDataSeeder extends Seeder
             [
                 'title'       => 'GradNet Alumni Homecoming 2025 — A Night to Remember',
                 'description' => "Last Saturday's alumni homecoming was an unforgettable celebration of friendship, growth, and the enduring GradNet spirit. Over 500 graduates from various batches gathered at the school gymnasium, reconnecting with old friends and professors who shaped their careers.\n\nThe event featured a program highlighting alumni achievements, a tribute to retired faculty, and a showcase of how GradNet graduates have made their mark across healthcare, business, technology, and public service.\n\n\"Seeing everyone come together after so many years is a reminder of why this institution is more than a school — it's a family,\" said Alumni Association President Ma. Teresa Flores (BSN 2015).",
-                // Graduation caps thrown in the air
-                'image'       => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=630&fit=crop&auto=format',
+                // Alumni celebration / homecoming party
+                'image'       => 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=1200&h=630&fit=crop&auto=format',
                 'days_ago'    => 5,
             ],
             [
@@ -333,8 +346,8 @@ class DemoDataSeeder extends Seeder
                 'title'       => 'GradNet Alumni Homecoming & Grand Reunion 2025',
                 'description' => "Join us for the grandest alumni gathering of the year! Reconnect with your batchmates, meet new faces, and celebrate the spirit of GradNet together.\n\nThe evening features a program celebrating alumni milestones, tributes to retired faculty, cultural performances, a grand dinner buffet, and an after-party. Formal attire required.\n\nTickets available through the Alumni Association office. Early bird pricing ends two weeks before the event.",
                 'location'    => 'School Gymnasium, Balayan, Batangas',
-                // Celebration / party / reunion atmosphere
-                'image'       => 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=630&fit=crop&auto=format',
+                // Friends / alumni gathering celebration
+                'image'       => 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=630&fit=crop&auto=format',
                 'days'        => 14,
             ],
             [
@@ -405,7 +418,7 @@ class DemoDataSeeder extends Seeder
             ['Events',      DB::table('events')->count()],
         ]);
         $this->command->info('');
-        $this->command->line('  Admin login  → <info>admin@iccbi.edu.ph</info>  /  <info>password</info>');
+        $this->command->line('  Admin login  → <info>admin@gradnet.ph</info>  /  <info>password</info>');
         $this->command->line('  Alumni login → any email like <info>Maria.Santos@demo.gradnet.ph</info>  /  <info>password</info>');
     }
 }

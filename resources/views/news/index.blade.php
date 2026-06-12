@@ -25,7 +25,7 @@
                             <a href="{{ route('news.show', $item->id) }}"
                                class="card card-hover text-decoration-none d-block h-100">
                                 <div style="height:160px;overflow:hidden;">
-                                    <img src="{{ $item->image_url ?? asset('images/ICCLOGO.png') }}"
+                                    <img src="{{ $item->image_url ?? asset('images/gradnet-logo.png') }}"
                                          alt="{{ $item->title }}"
                                          style="width:100%;height:100%;object-fit:cover;transition:transform 0.3s ease;"
                                          onmouseover="this.style.transform='scale(1.05)'"

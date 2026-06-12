@@ -18,7 +18,7 @@ class AccountRejected extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Your ICCBI Alumni Account Application',
+            subject: 'Your GradNet Alumni Account Application',
         );
     }
 

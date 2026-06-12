@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'News')
 
@@ -26,7 +26,7 @@
                 @forelse ($news as $item)
                     <tr>
                         <td>
-                            <img src="{{ $item->image_url ?? asset('images/ICCLOGO.png') }}"
+                            <img src="{{ $item->image_url ?? asset('images/gradnet-logo.png') }}"
                                  alt="{{ $item->title }}"
                                  style="width:52px;height:36px;object-fit:cover;border-radius:4px;">
                         </td>

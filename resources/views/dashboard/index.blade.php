@@ -113,7 +113,7 @@
                             <a href="{{ route('news.show', $item->id) }}"
                                class="card card-hover text-decoration-none d-block h-100">
                                 <div style="height:140px;overflow:hidden;background:var(--surface-3);">
-                                    <img src="{{ $item->image_url ?? asset('images/ICCLOGO.png') }}"
+                                    <img src="{{ $item->image_url ?? asset('images/gradnet-logo.png') }}"
                                          alt="{{ $item->title }}"
                                          style="width:100%;height:100%;object-fit:cover;">
                                 </div>
@@ -158,7 +158,7 @@
                        onmouseover="this.style.background='var(--surface-2)'"
                        onmouseout="this.style.background='transparent'">
                         <div class="flex-shrink-0" style="width:68px;height:68px;border-radius:var(--radius-sm);overflow:hidden;background:var(--surface-3);">
-                            <img src="{{ $event->image_url ?? asset('images/ICCLOGO.png') }}"
+                            <img src="{{ $event->image_url ?? asset('images/gradnet-logo.png') }}"
                                  alt="{{ $event->title }}"
                                  style="width:100%;height:100%;object-fit:cover;">
                         </div>
@@ -199,7 +199,7 @@
                    onmouseover="this.style.background='var(--surface-2)'"
                    onmouseout="this.style.background='transparent'">
                     <div class="flex-shrink-0 position-relative" style="width:68px;height:68px;border-radius:var(--radius-sm);overflow:hidden;background:var(--surface-3);">
-                        <img src="{{ $event->image_url ?? asset('images/ICCLOGO.png') }}"
+                        <img src="{{ $event->image_url ?? asset('images/gradnet-logo.png') }}"
                              alt="{{ $event->title }}"
                              style="width:100%;height:100%;object-fit:cover;opacity:0.75;">
                         <span class="badge badge-muted position-absolute"

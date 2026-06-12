@@ -6,7 +6,7 @@
 
 @php
     /* Precompute so no function calls inside HTML attribute contexts */
-    $svgFallback = asset('images/icc-background.jpg');
+    $svgFallback = asset('images/gradnet-logo.png');
 @endphp
 
     {{-- ── Upcoming Events ─────────────────────────────────────────── --}}
@@ -27,7 +27,7 @@
             <div style="padding:0;">
                 @foreach ($upcomingEvents as $event)
                     @php
-                        $eventImg  = $event->image_url ?? asset('images/ICCLOGO.png');
+                        $eventImg  = $event->image_url ?? asset('images/gradnet-logo.png');
                         $goingCount = $goingCounts[$event->id] ?? 0;
                     @endphp
                     <a href="{{ route('events.show', $event->id) }}"
@@ -88,7 +88,7 @@
         <div style="padding:0;">
             @foreach ($previousEvents as $event)
                 @php
-                    $eventImg = $event->image_url ?? asset('images/ICCLOGO.png');
+                    $eventImg = $event->image_url ?? asset('images/gradnet-logo.png');
                 @endphp
                 <a href="{{ route('events.show', $event->id) }}"
                    class="d-flex gap-3 text-decoration-none p-4 border-bottom"

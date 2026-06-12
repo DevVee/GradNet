@@ -18,7 +18,7 @@ class AccountApproved extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Your ICCBI Alumni Account Has Been Approved',
+            subject: 'Your GradNet Alumni Account Has Been Approved',
         );
     }
 

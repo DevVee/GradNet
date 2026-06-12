@@ -15,9 +15,10 @@
 
         {{-- Brand --}}
         <a href="{{ route('dashboard') }}" class="topbar-brand" title="GradNet Home">
-            <div class="topbar-brand-icon">
-                <i class="fas fa-graduation-cap"></i>
-            </div>
+            <img src="{{ asset('images/gradnet-logo.png') }}"
+                 alt="GradNet"
+                 class="topbar-brand-img"
+                 onerror="this.style.display='none'">
             <span class="topbar-brand-name">
                 Grad<span>Net</span>
             </span>

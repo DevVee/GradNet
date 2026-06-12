@@ -22,7 +22,7 @@ class WeeklyDigest extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'ICCBI Alumni — Your Weekly Update',
+            subject: 'GradNet — Your Weekly Update',
         );
     }
 

@@ -52,7 +52,7 @@ class NotificationService
     {
         $vapidPublic  = config('app.vapid_public_key');
         $vapidPrivate = config('app.vapid_private_key');
-        $subject      = config('app.vapid_subject', 'mailto:noreply@iccbi.edu.ph');
+        $subject      = config('app.vapid_subject', 'mailto:noreply@gradnet.ph');
 
         if (empty($vapidPublic) || empty($vapidPrivate)) return;
 
@@ -69,9 +69,9 @@ class NotificationService
             ]);
 
             $payload = json_encode([
-                'title' => 'ICCBI Alumni',
+                'title' => 'GradNet',
                 'body'  => $body,
-                'icon'  => '/images/ICCLOGO.png',
+                'icon'  => '/images/gradnet-logo.png',
                 'type'  => $type,
             ]);
 

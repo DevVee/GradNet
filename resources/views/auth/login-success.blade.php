@@ -15,7 +15,7 @@
                 box-shadow:var(--shadow-xl);padding:2rem 1.5rem;text-align:center;
                 animation:scaleIn 0.45s ease forwards;">
 
-        <img src="{{ asset('images/ICCLOGO.png') }}"
+        <img src="{{ asset('images/gradnet-logo.png') }}"
              alt="GradNet Logo"
              style="width:100px;height:auto;margin-bottom:var(--sp-4);
                     border-radius:var(--radius-sm);animation:bounce 1.5s infinite;"

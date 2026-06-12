@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'Events')
 
@@ -32,7 +32,7 @@
                     @endphp
                     <tr>
                         <td>
-                            <img src="{{ $event->image_url ?? asset('images/ICCLOGO.png') }}"
+                            <img src="{{ $event->image_url ?? asset('images/gradnet-logo.png') }}"
                                  alt="{{ $event->title }}"
                                  style="width:52px;height:36px;object-fit:cover;border-radius:4px;">
                         </td>

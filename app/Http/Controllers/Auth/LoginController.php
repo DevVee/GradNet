@@ -52,8 +52,7 @@ class LoginController extends Controller
         Auth::login($user, $request->boolean('remember_me'));
         $request->session()->regenerate();
 
-        // Show the animated loading popup (extracted from legacy login.php)
-        // The view has a "Continue" button that redirects to dashboard.
-        return view('auth.login-success', compact('user'));
+        // Redirect directly to dashboard — no welcome modal
+        return redirect()->route('dashboard');
     }
 }

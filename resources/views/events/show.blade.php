@@ -20,7 +20,7 @@
     $authAvatarUrl = $authUser->avatar_url;
     $authFirstName = $authUser->first_name;
     $commentCount  = $event->comments->count();
-    $eventImageSrc = $event->image_url ?? asset('images/icc-background.jpg');
+    $eventImageSrc = $event->image_url ?? asset('images/gradnet-logo.png');
 
     $commentsData = $event->comments->map(function ($c) use ($svgFallback, $authUser) {
         return [

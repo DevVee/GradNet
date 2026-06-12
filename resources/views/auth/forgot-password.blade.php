@@ -8,9 +8,9 @@
 
     {{-- Banner --}}
     <div class="auth-banner">
-        <img src="{{ asset('images/icc-background.jpg') }}" alt="GradNet">
+        <img src="{{ asset('images/gradnet-logo.png') }}" alt="GradNet">
         <div class="auth-banner-overlay">
-            <img src="{{ asset('images/logo.png') }}" class="auth-banner-logo" alt="GradNet Logo"
+            <img src="{{ asset('images/gradnet-logo.png') }}" class="auth-banner-logo" alt="GradNet Logo"
                  onerror="this.style.display='none'">
             <span class="auth-banner-title">GradNet</span>
         </div>
