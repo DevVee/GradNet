@@ -1,0 +1,85 @@
+## render.yaml — ICCBI Alumni Laravel on Render.com
+## Docs: https://render.com/docs/render-yaml
+##
+## Deployment flow:
+##   1. Render provisions a web service from this repo.
+##   2. The build command installs deps and runs migrations.
+##   3. The start command serves via PHP built-in server (or swap with frankenphp/octane).
+##
+## Database: External Supabase PostgreSQL (not Render Postgres).
+## Storage:  Public disk backed by Render's ephemeral disk (or S3 in production).
+
+services:
+  - type: web
+    name: iccbi-alumni
+    runtime: php
+    region: singapore          # closest to PH; alternatives: oregon, ohio
+    plan: free                 # upgrade to starter ($7/mo) for 0-downtime deploys
+
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php artisan config:clear
+      php artisan route:clear
+      php artisan view:clear
+      php artisan storage:link
+      php artisan migrate --force
+
+    startCommand: |
+      php artisan serve --host=0.0.0.0 --port=$PORT
+
+    envVars:
+      # ── App ─────────────────────────────────────────────────
+      - key: APP_NAME
+        value: ICCBI Alumni
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true      # Render auto-generates a secure key
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_URL
+        value: https://iccbi-alumni.onrender.com   # change to your actual URL
+
+      # ── Database (Supabase PostgreSQL) ───────────────────────
+      # Set these in Render Dashboard → Environment → Secret Files
+      # Use the "Connection string (URI)" from your Supabase project:
+      # postgresql://postgres:<password>@db.<ref>.supabase.co:5432/postgres
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        sync: false              # set manually in Render dashboard
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_DATABASE
+        value: postgres
+      - key: DB_USERNAME
+        sync: false              # set manually
+      - key: DB_PASSWORD
+        sync: false              # set manually (Supabase DB password)
+
+      # ── Session / Cache ──────────────────────────────────────
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+
+      # ── Mail (optional) ──────────────────────────────────────
+      - key: MAIL_MAILER
+        value: smtp
+      - key: MAIL_FROM_ADDRESS
+        value: noreply@iccbi.edu.ph
+
+      # ── Web Push (VAPID) ─────────────────────────────────────
+      # Copy the keys that were generated with: php artisan alumni:vapid-generate
+      - key: VAPID_PUBLIC_KEY
+        sync: false
+      - key: VAPID_PRIVATE_KEY
+        sync: false
+      - key: VAPID_SUBJECT
+        value: "mailto:noreply@iccbi.edu.ph"
+
+      # ── Storage ──────────────────────────────────────────────
+      - key: FILESYSTEM_DISK
+        value: public
