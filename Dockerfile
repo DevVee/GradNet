@@ -13,7 +13,8 @@ FROM php:8.2-fpm-alpine
 RUN apk add --no-cache \
         nginx \
         supervisor \
-        libpq-dev \
+        sqlite \
+        sqlite-dev \
         libzip-dev \
         libpng-dev \
         libjpeg-turbo-dev \
@@ -27,7 +28,7 @@ RUN apk add --no-cache \
         gettext \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" \
-          pdo pdo_pgsql pgsql zip opcache mbstring gd dom xml intl bcmath exif \
+          pdo pdo_sqlite zip opcache mbstring gd dom xml intl bcmath exif \
     && rm -rf /var/cache/apk/*
 
 # ── OPcache tuning ────────────────────────────────────────────────────────────
@@ -78,10 +79,19 @@ COPY --from=assets /app/public/build ./public/build
 RUN composer dump-autoload --no-dev --optimize \
     && php artisan package:discover --ansi
 
+# ── Pre-seed SQLite at build time ─────────────────────────────────────────────
+# The image ships with full demo data already in place.
+# → Zero cold-seed delay on first request after deploy.
+# → Data resets to a clean state on every new deploy (ephemeral container FS).
+# The temporary APP_KEY is overwritten at boot via Render env vars.
+RUN cp .env.example .env \
+    && php artisan key:generate --force \
+    && touch database/database.sqlite \
+    && php artisan migrate --force \
+    && php artisan db:seed --class=DemoDataSeeder --force \
+    && rm .env
+
 # ── Runtime Docker config ─────────────────────────────────────────────────────
-# NOTE: Database migrations are NOT run at build time because the database is
-# an external Supabase PostgreSQL service — not reachable during docker build.
-# Migrations run at container startup in docker/start.sh instead.
 COPY docker/nginx.conf.template /etc/nginx/nginx.conf.template
 COPY docker/supervisord.conf    /etc/supervisord.conf
 COPY docker/start.sh            /start.sh
@@ -89,7 +99,8 @@ RUN chmod +x /start.sh
 
 # ── Permissions ───────────────────────────────────────────────────────────────
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 storage bootstrap/cache
+    && chmod -R 775 storage bootstrap/cache \
+    && chmod 664 database/database.sqlite
 
 EXPOSE 8080
 

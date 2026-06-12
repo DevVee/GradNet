@@ -1,102 +1,124 @@
-## render.yaml — GradNet Laravel 12 on Render.com (Docker)
-## Docs: https://render.com/docs/render-yaml
-##
-## Deployment flow:
-##   1. Render builds the Docker image (Dockerfile) — compiles Vite assets + installs PHP deps
-##   2. Container starts → docker/start.sh runs migrations, caches config, boots nginx + php-fpm
-##
-## Database : External Supabase PostgreSQL (Singapore region)
-## Runtime  : Docker (nginx + php-fpm + supervisor) — same stack as Clinovia
-## Storage  : Render ephemeral disk (files lost on redeploy — use S3/R2 for persistence)
-##
-## ⚠️  Before first deploy — set these in Render Dashboard → Environment:
-##   APP_KEY       → run locally: php artisan key:generate --show
-##   DB_HOST       → from Supabase: Settings → Database → Host
-##   DB_PASSWORD   → Supabase DB password
-##   DB_USERNAME   → postgres (or your Supabase user)
-##   VAPID_PUBLIC_KEY  → copy from your local .env
-##   VAPID_PRIVATE_KEY → copy from your local .env  (keep as Secret)
+# GradNet — Render deployment (SQLite, Docker, free tier)
+# Docs: https://render.com/docs/blueprint-spec
+#
+# Demo credentials (seeded at Docker build time):
+#   Admin : admin@gradnet.ph  /  password
+#   Users : *@demo.gradnet.ph /  password   ← alumni demo accounts
+#
+# ── IMPORTANT: APP_KEY ────────────────────────────────────────────────────────
+# This key is stable — it was generated once locally and must never change.
+# Changing it invalidates all active sessions and CSRF tokens (→ 419 errors).
+# To rotate: generate a new key with `php artisan key:generate --show`,
+# update this value, and expect all logged-in users to be signed out.
+#
+# ── IMPORTANT: APP_URL ────────────────────────────────────────────────────────
+# After creating the Render service, update APP_URL to your actual service URL
+# (e.g. https://gradnet.onrender.com). Wrong APP_URL breaks asset loading and
+# redirects.
 
 services:
   - type: web
     name: gradnet
     runtime: docker
-    dockerfilePath: ./Dockerfile
-    region: singapore
     plan: free
+    region: singapore
+    healthCheckPath: /up
+
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
 
     envVars:
-      # ── App ─────────────────────────────────────────────────────────────────
+      # App
       - key: APP_NAME
         value: GradNet
       - key: APP_ENV
         value: production
-      - key: APP_KEY
-        # IMPORTANT: Do NOT use generateValue — it creates a new key on every
-        # deploy, invalidating all sessions and CSRF tokens (→ 419 errors).
-        # Generate once:  php artisan key:generate --show
-        # Then paste the base64:... value here or set it in Render Dashboard.
-        sync: false
       - key: APP_DEBUG
         value: "false"
+
+      # Stable APP_KEY — do NOT replace with generateValue: true
+      - key: APP_KEY
+        value: "base64:o7YSOYxYREgYuFyljWGdR72AZymlAQcyerIY3A9Zz0c="
+
+      # Update this to your actual Render service URL after first deploy
       - key: APP_URL
-        # Update to your actual Render service URL after first deploy
         value: "https://gradnet.onrender.com"
+
+      - key: APP_TIMEZONE
+        value: Asia/Manila
+
+      # Database — SQLite lives in the container; resets on each new deploy
+      - key: DB_CONNECTION
+        value: sqlite
+
+      # Session
+      - key: SESSION_DRIVER
+        value: database
+      - key: SESSION_LIFETIME
+        value: "480"
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
+      - key: SESSION_SAME_SITE
+        value: lax
+      - key: SESSION_ENCRYPT
+        value: "true"
+
+      # Cache / Queue
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+
+      # Logging — stderr so Render captures it in the log stream
       - key: LOG_CHANNEL
         value: stderr
       - key: LOG_LEVEL
         value: error
 
-      # ── Database (Supabase PostgreSQL — Transaction Pooler) ──────────────────
-      # Get these from: Supabase Dashboard → Settings → Database → Connection info
-      # Use the "Transaction pooler" host (port 6543) for serverless/PaaS deploys.
-      - key: DB_CONNECTION
-        value: pgsql
-      - key: DB_HOST
-        sync: false              # e.g. aws-0-ap-southeast-1.pooler.supabase.com
-      - key: DB_PORT
-        value: "6543"            # Transaction pooler port (use 5432 for direct)
-      - key: DB_DATABASE
-        value: postgres
-      - key: DB_USERNAME
-        sync: false              # e.g. postgres.abcdefghijklmnop
-      - key: DB_PASSWORD
-        sync: false
-      - key: DB_SSLMODE
-        value: require
+      # Trust Render's load-balancer proxy
+      - key: TRUST_PROXIES
+        value: "*"
 
-      # ── Session / Cache / Queue ───────────────────────────────────────────────
-      - key: SESSION_DRIVER
-        value: database
-      - key: SESSION_LIFETIME
-        value: "480"             # 8-hour session (matches a full school/work day)
-      - key: CACHE_STORE
-        value: database
-      - key: QUEUE_CONNECTION
-        value: sync
+      # Bcrypt cost (lower = faster login on free tier's shared CPU)
+      - key: BCRYPT_ROUNDS
+        value: "10"
 
-      # ── Storage ───────────────────────────────────────────────────────────────
-      # "public" means storage/app/public symlinked to public/storage.
-      # NOTE: Render's ephemeral filesystem loses uploads on each redeploy.
-      # For persistent uploads (profile pics, post media) switch to S3/R2:
-      #   FILESYSTEM_DISK=s3  + AWS_* credentials
+      # Storage — ephemeral public disk (uploads lost on redeploy)
+      # For persistent uploads switch to S3/R2 and set FILESYSTEM_DISK=s3
       - key: FILESYSTEM_DISK
         value: public
 
-      # ── Mail ──────────────────────────────────────────────────────────────────
+      # Mail — log only for demo; set to smtp when ready
       - key: MAIL_MAILER
-        value: log               # Change to smtp in production when mail is ready
+        value: log
       - key: MAIL_FROM_ADDRESS
         value: "noreply@gradnet.app"
       - key: MAIL_FROM_NAME
         value: GradNet
 
-      # ── Web Push Notifications (VAPID) ────────────────────────────────────────
-      # Copy from your local .env (generated with: php artisan alumni:vapid-generate)
-      # Keep VAPID_PRIVATE_KEY as a Secret in Render Dashboard.
+      # Web Push Notifications (VAPID)
+      # Copy from your local .env — keep VAPID_PRIVATE_KEY as a Secret
       - key: VAPID_PUBLIC_KEY
-        sync: false
+        value: "BLSRjdzlY2_LKBfDBRQN1Sc3YdCKWun6aGgb2AWCr22VjxObQPUHshrHCnkljRhPfZZtonj1vBmOMMNzyiyHDxw"
       - key: VAPID_PRIVATE_KEY
-        sync: false
+        sync: false          # Set this as a Secret in Render Dashboard
       - key: VAPID_SUBJECT
         value: "mailto:noreply@gradnet.app"
+
+# ── Keep-alive cron job ───────────────────────────────────────────────────────
+# Pings the web service every 10 minutes so Render free tier never sleeps.
+# Render sleeps after 15 min of inactivity; 10 min gives comfortable headroom.
+  - type: cron
+    name: gradnet-keepalive
+    runtime: image
+    image:
+      url: docker.io/curlimages/curl:8
+    region: singapore
+    schedule: "*/10 * * * *"
+    startCommand: curl -sf --max-time 15 "https://${PING_HOST}/up" || true
+    envVars:
+      - key: PING_HOST
+        fromService:
+          name: gradnet
+          type: web
+          property: host
