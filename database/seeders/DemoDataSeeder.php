@@ -106,16 +106,16 @@ class DemoDataSeeder extends Seeder
         $admin = \App\Models\User::updateOrCreate(
             ['email' => 'admin@gradnet.ph'],
             [
-                'first_name'        => 'Admin',
-                'last_name'         => 'GradNet',
+                'first_name'        => 'Prince Arvee',
+                'last_name'         => 'Avena',
                 'password'          => Hash::make('password'),
                 'role'              => 'admin',
                 'status'            => 'approved',
-                'program'           => 'BSN',
-                'graduation_year'   => 2019,
+                'program'           => 'BSCS',
+                'graduation_year'   => 2022,
                 'employment_status' => 'Employed',
                 'home_municipality' => 'Balayan',
-                'profile_picture'   => 'https://i.pravatar.cc/200?img=70',
+                'profile_picture'   => 'prince-arvee.jpg',
             ]
         );
 
@@ -123,15 +123,19 @@ class DemoDataSeeder extends Seeder
         $this->command->info('   Creating alumni users…');
         $users = collect();
 
-        // First 4 are BSN 2019 — same program+year as admin (batchmates)
+        // 7 named BSCS 2022 batchmates — same program+year as admin (show on dashboard)
+        // first, last, program, grad_year, employment, municipality, photo_file
         $batchmates = [
-            ['Maria',   'Santos',   'BSN',   2019, 'Employed',     'Balayan', 1],
-            ['Carlo',   'Reyes',    'BSN',   2019, 'Employed',     'Nasugbu', 12],
-            ['Jasmine', 'Cruz',     'BSN',   2019, 'Student',      'Lemery',  2],
-            ['Miguel',  'Bautista', 'BSN',   2019, 'Self-Employed','Tuy',     13],
+            ['Kian',         'Bahia',   'BSCS', 2022, 'Employed',     'Balayan',  'kian-bahia.png'],
+            ['Christian',    'Avena',   'BSCS', 2022, 'Employed',     'Nasugbu',  'christian-avena.png'],
+            ['Errol',        'Alday',   'BSCS', 2022, 'Self-Employed','Lemery',   'errol-alday.png'],
+            ['John Rafael',  'Marata',  'BSCS', 2022, 'Employed',     'Tuy',      'john-marata.png'],
+            ['Ken',          'Estillo', 'BSCS', 2022, 'Employed',     'Calaca',   'ken-estillo.png'],
+            ['Chito',        'Afable',  'BSCS', 2022, 'Student',      'Lian',     'chito-afable.png'],
+            ['Ralph',        'Cabello', 'BSCS', 2022, 'Employed',     'Tuy',      'ralph-cabello.png'],
         ];
         foreach ($batchmates as $b) {
-            $email = strtolower($b[0] . '.' . $b[1] . '@demo.gradnet.ph');
+            $email = strtolower(str_replace(' ', '', $b[0]) . '.' . strtolower($b[1]) . '@demo.gradnet.ph');
             $user  = \App\Models\User::create([
                 'first_name'        => $b[0],
                 'last_name'         => $b[1],
@@ -143,7 +147,7 @@ class DemoDataSeeder extends Seeder
                 'graduation_year'   => $b[3],
                 'employment_status' => $b[4],
                 'home_municipality' => $b[5],
-                'profile_picture'   => 'https://i.pravatar.cc/200?img=' . $b[6],
+                'profile_picture'   => $b[6],
             ]);
             $users->push($user);
         }

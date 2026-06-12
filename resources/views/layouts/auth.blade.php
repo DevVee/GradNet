@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/alumni.css') }}?v={{ filemtime(public_path('css/alumni.css')) }}">
 </head>
-<body style="overflow:hidden;">
+<body>
 
 <div class="auth-split">
 

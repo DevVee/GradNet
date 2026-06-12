@@ -16,7 +16,7 @@ class DashboardController extends Controller
         /** @var User $user */
         $user = Auth::user();
 
-        // ── Batchmates (same program + graduation_year, up to 5) ────────
+        // ── Batchmates (same program + graduation_year, up to 7) ────────
         $canFetchBatchmates = $user->program && $user->graduation_year;
         $batchmates         = collect();
         $batchmatesTitle    = '(Set your program and year to find batchmates)';
@@ -25,10 +25,9 @@ class DashboardController extends Controller
             $batchmates = User::where('program', $user->program)
                 ->where('graduation_year', $user->graduation_year)
                 ->where('id', '!=', $user->id)
-                ->where('role', 'user')
                 ->where('status', 'approved')
                 ->select('id', 'first_name', 'last_name', 'profile_picture', 'program', 'graduation_year')
-                ->limit(5)
+                ->limit(7)
                 ->get();
 
             $batchmatesTitle = '(' . $user->program . ' ' . $user->graduation_year . ')';

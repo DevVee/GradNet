@@ -22,12 +22,15 @@ class ConnectionController extends Controller
         $filterLocation   = $request->query('location', '');
 
         // ── Accepted connections ─────────────────────────────────────
+        // .unique('id') removes duplicates that arise from bidirectional rows
         $connections = $user->connections()
             ->accepted()
             ->with(['requester:id,first_name,last_name,profile_picture,program,graduation_year',
                     'recipient:id,first_name,last_name,profile_picture,program,graduation_year'])
             ->get()
-            ->map(fn($c) => $c->requester_id === $user->id ? $c->recipient : $c->requester);
+            ->map(fn($c) => $c->requester_id === $user->id ? $c->recipient : $c->requester)
+            ->unique('id')
+            ->values();
 
         // ── Pending received requests ────────────────────────────────
         $pendingReceived = Connection::where('followed_id', $user->id)
